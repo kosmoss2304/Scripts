@@ -27,7 +27,5 @@ public class GameFinishTrigger : MonoBehaviour
         foreach(var coin in _coins)        
             if (coin.IsReached == false)
                 return;      
-
-        Debug.Log("Все монеты собраны!");
     }
 }

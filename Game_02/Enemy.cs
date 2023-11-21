@@ -39,12 +39,4 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<PlayerMovement>(out PlayerMovement component))
-        {                     
-            Debug.Log("Враг нанес вам удар!");
-        }
-    }
 }
