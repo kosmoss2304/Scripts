@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
+
 [RequireComponent(typeof(Transform))]
 
-public class InstantiateBulletsShooting : MonoBehaviour
+public class ShootByTarget : MonoBehaviour
 {
     [SerializeField] private float _speedBullet;
     [SerializeField] private GameObject _prefabBullet;
@@ -14,10 +15,10 @@ public class InstantiateBulletsShooting : MonoBehaviour
     private void Start()
     {
         _transform = GetComponent<Transform>();
-        var shootByTargetJob = StartCoroutine(ShootByTarget());
+        var shootByTargetJob = StartCoroutine(Shoot());
     }
 
-    private IEnumerator ShootByTarget()
+    private IEnumerator Shoot()
     {
         bool isShooting = true;
 
