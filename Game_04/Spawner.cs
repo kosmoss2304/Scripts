@@ -6,13 +6,15 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {   
     [SerializeField] private Transform _allPoint;
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private float _frequencySpawn;
 
     private Transform[] _points;
+    private WaitForSeconds _waitForSeconds;
 
     private void Start()
-    {       
+    {
+        _waitForSeconds = new WaitForSeconds(_frequencySpawn);
         _points = new Transform[_allPoint.childCount];
 
         for (int i = 0; i < _allPoint.childCount; i++)
@@ -29,9 +31,9 @@ public class Spawner : MonoBehaviour
         {
             Transform randomSpawner = _points[Random.Range(0, _points.Length)];
 
-            GameObject enemy = Instantiate(_enemyPrefab, randomSpawner.position, Quaternion.identity);           
+            Enemy enemy = Instantiate(_enemyPrefab, randomSpawner.position, Quaternion.identity);
 
-            yield return new WaitForSecondsRealtime(_frequencySpawn);
+            yield return _waitForSeconds;
         }
     }
 }
