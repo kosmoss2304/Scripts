@@ -9,21 +9,24 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _frequencySpawn;
     [SerializeField] private Transform _target;
 
-    private Transform[] _points;
+    private Transform[] _points;    
 
     private void Start()
-    {              
+    {        
         var createEnemyJob = StartCoroutine(CreateEnemy());
     }
 
     private IEnumerator CreateEnemy()
     {
+        WaitForSeconds _waitForSeconds = new WaitForSeconds(_frequencySpawn);
+
         while (true)
         {
-            Enemy enemy = Instantiate<Enemy>(_enemyPrefab, transform.position, Quaternion.identity);
-            enemy.TakeTarget(_target);
+            Enemy enemy = Instantiate
+                (_enemyPrefab, transform.position, Quaternion.identity);
+            enemy.SetTarget(_target);
 
-            yield return new WaitForSecondsRealtime(_frequencySpawn);
+            yield return _waitForSeconds;
         }
     }
 }

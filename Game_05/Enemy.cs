@@ -10,10 +10,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * _speed);
+        transform.position = Vector3.MoveTowards
+            (transform.position, _target.position, Time.deltaTime * _speed);
     }
 
-    public void TakeTarget(Transform target)
+    public void SetTarget(Transform target)
     {
         _target = target;
     }
