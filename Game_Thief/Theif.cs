@@ -11,6 +11,7 @@ public class Theif : MonoBehaviour
 
     private bool _isGrounded;
     private Rigidbody2D _rigidbody2D;
+    private const string DirectionMovement = "Horizontal";
 
     private void Start()
     {
@@ -19,8 +20,6 @@ public class Theif : MonoBehaviour
 
     private void Update()
     {
-        const string DirectionMovement = "Horizontal";
-
         float x = Input.GetAxis(DirectionMovement);
 
         transform.Translate(new Vector3(x, 0, 0) * Time.deltaTime * _speed);
