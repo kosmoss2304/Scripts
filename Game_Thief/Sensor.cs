@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {   
-    [SerializeField] private SoundControl _soundControl;
+    [SerializeField] private TargetVolumeInstaller _soundControl;
     [SerializeField] private float _detectionDistance;
     [SerializeField] private Color _detectionColor;
 

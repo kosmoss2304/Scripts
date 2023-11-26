@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class SoundControl : MonoBehaviour
+public class TargetVolumeInstaller : MonoBehaviour
 {
     private AudioSource _audioSource;
     private Coroutine _coroutine;
@@ -17,11 +17,6 @@ public class SoundControl : MonoBehaviour
         _audioSource.volume = _minVolume;
     }
    
-    private void Update()
-    {
-        _currentVolume = _audioSource.volume;       
-    }
-
     public void TakeTargetVolume(float targetVolume)
     {
         if (_coroutine != null)
@@ -35,6 +30,8 @@ public class SoundControl : MonoBehaviour
     private IEnumerator ChangeVolume(float targetVolume)
     {
         float step = 0.001f;
+
+        _currentVolume = _audioSource.volume;
 
         while (_currentVolume != targetVolume)
         {
