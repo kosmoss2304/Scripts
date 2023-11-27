@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class Theif : MonoBehaviour
 {
+    private const string DirectionMovement = "Horizontal";
+
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    private bool _isGrounded;
     private Rigidbody2D _rigidbody2D;
-    private const string DirectionMovement = "Horizontal";
+    private bool _isGrounded;
 
     private void Start()
     {

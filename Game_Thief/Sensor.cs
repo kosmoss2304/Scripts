@@ -1,39 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent (typeof (Alarm))]
 
 public class Sensor : MonoBehaviour
 {   
-    [SerializeField] private TargetVolumeInstaller _soundControl;
-    [SerializeField] private float _detectionDistance;
-    [SerializeField] private Color _detectionColor;
-
-    private SpriteRenderer _spriteRenderer;    
-    private Color _defaultColor;
-    private float _maxVolume = 1;
-    private float _minVolume = 0;
+    private Alarm _alarm;          
+    private bool _isDetectedThief;
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();      
-        _defaultColor = _spriteRenderer.color;           
+        _alarm = GetComponent<Alarm> ();
     }
 
     private void Update()
-    {
-        RaycastHit2D detection = Physics2D.Raycast(transform.position, - transform.right, _detectionDistance);       
-
-        if (detection)
-        {
-            _spriteRenderer.color = _detectionColor;
-            _soundControl.TakeTargetVolume(_maxVolume);
-        }
-        else
-        {
-            _spriteRenderer.color = _defaultColor;
-            _soundControl.TakeTargetVolume(_minVolume);
-        }         
+    {                
+        _alarm.TakeTargetVolume(Convert.ToInt32(_isDetectedThief));       
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Theif theif))       
+            _isDetectedThief = true;        
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {        
+        _isDetectedThief = false;       
+    }   
 }

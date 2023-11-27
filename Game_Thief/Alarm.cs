@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class TargetVolumeInstaller : MonoBehaviour
+public class Alarm : MonoBehaviour
 {
     private AudioSource _audioSource;
     private Coroutine _coroutine;
