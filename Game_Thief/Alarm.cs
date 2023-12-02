@@ -8,7 +8,8 @@ public class Alarm : MonoBehaviour
 {
     private AudioSource _audioSource;
     private Coroutine _coroutine;
-    private float _minVolume = 0;   
+    private float _minVolume = 0;
+    private float _maxVolume = 1;
     private float _currentVolume;
 
     private void Start()
@@ -16,8 +17,18 @@ public class Alarm : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _minVolume;
     }
-   
-    public void TakeTargetVolume(float targetVolume)
+
+    public void Enable()
+    {
+        TakeTargetVolume(_maxVolume);
+    }
+
+    public void Disable() 
+    {
+        TakeTargetVolume(_minVolume);
+    }
+
+    private void TakeTargetVolume(float targetVolume)
     {
         if (_coroutine != null)
         {
