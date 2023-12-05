@@ -3,39 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 
 public class PlayerMovement : MonoBehaviour
-{    
+{
+    private const string DirectionMovement = "Horizontal";
+    private const string AnimationTriggerFall = "Fall";
+
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-
-    private Transform _transform;
+   
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded = false;
 
     private void Start()
-    {
-        _transform = GetComponent<Transform>();
+    {       
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
-    {
-        const string DirectionMovement = "Horizontal";
-
+    {   
         float x = Input.GetAxis(DirectionMovement);
-
+        
         SetTriggerAnimation(x);
      
-        _transform.Translate(new Vector3(x, 0, 0) * _speed * Time.deltaTime);
+        transform.Translate(new Vector3(x, 0, 0) * _speed * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.Space) && _isGrounded)
         {
@@ -45,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isGrounded == false)
         {
-            _animator.SetTrigger("Fall");
+            _animator.SetTrigger(AnimationTriggerFall);
         }
     }
 
