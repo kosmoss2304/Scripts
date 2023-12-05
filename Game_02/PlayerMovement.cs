@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<TilemapCollider2D>(out TilemapCollider2D tilimapCollisionObject))
+        if (collision.gameObject.TryGetComponent(out TilemapCollider2D tilimapCollisionObject))
         {
             _isGrounded = true;
         }   
